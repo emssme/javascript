@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 기본05 - 객체 그리고 함수</title>
+</head>
+<body>
+    <div id="res"></div>
+    <div id="res2"></div>
+    <div id="res3"></div>
+    <script>
+        var man1 = {no:1, name:"김보경", style:"집", point:100};
+        man1.name = "집가고싶다";  //값 변경
+        function people(no, name, age, style){
+            this.no = no;
+            this.name = name;
+            this.age = age;
+            this.style = style;
+            this.print = function(){
+                var res = document.getElementById("res");
+                res.innerHTML = "<p>"+this.name+"</p>"
+            }
+        }
+        var st1 = new people(1, "김보경", 25, "잠온다");
+        var st2 = new people(2, "김보경2", 27, "잠와요");
+        var st3 = new people(3, "김보경3", 25, "잠와");
+
+        st1.print();
+        st2.print();
+        st3.print();
+
+        st1.family = "경주김씨";  //속성 추가
+        st1.toString = function(){  //메소드추가
+            var res2 = document.getElementById("res2");
+            var html = "<p>";
+            html+="<span>본관: "+this.family+"</span>";
+            html+="<span>이름: "+this.name+"</span>";
+            html+="<span>나이: "+this.age+"</span>";
+            html+="</p>";
+            res2.innerHTML = html;
+        }
+        st1.toString();  //메소드 호출
+
+        //객체의 순회
+        html = "";
+        for(var field in st1){           
+            html+="<p>"+field+"</p>"
+        }
+        var res3 = document.getElementById("res3");
+        res3.innerHTML = html;
+
+        delete st1.family;  //속성 제거
+        for(var field in st1){           
+            console.log(field)
+        }
+
+    </script>
+</body>
+</html>
